@@ -21,14 +21,9 @@ public class Repertory implements Iterable<String> {
 	}
 	
 	public String getEntryForName(String searchedName) throws NoSuchElementException {
-		if (searchedName != null) {
-			for (String name : names) {
-				if (name.toLowerCase().equals(searchedName.toLowerCase())) {
-					return name;
-				}
-			}
-		}
-		
-		throw new NoSuchElementException("Entry named [" + searchedName + "] not found");
+		return getNames()
+				.stream()
+				.filter(name -> name.toLowerCase().equals(searchedName != null ? searchedName.toLowerCase() : null))
+				.findFirst().get();
 	}
 }
