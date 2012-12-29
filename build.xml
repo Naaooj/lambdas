@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="lambdas" default="compile" basedir=".">
+
+    <property name="src.dir" location="" />
+    <property name="target.dir" location="target/classes" />
+    <property name="build.compiler" value="modern" />
+
+    <!-- Deletes the existing build directory-->
+    <target name="clean">
+        <delete dir="${target.dir}" />
+    </target>
+
+    <!-- Creates the  build  directory-->
+    <target name="makedir">
+        <mkdir dir="${target.dir}" />
+    </target>
+
+    <!-- Compiles the java code -->
+    <target name="compile" depends="clean, makedir">
+        <javac 
+        	srcdir="${src.dir}" 
+        	destdir="${target.dir}" 
+        	includeAntRuntime="false"
+        />
+    </target>
+</project>
