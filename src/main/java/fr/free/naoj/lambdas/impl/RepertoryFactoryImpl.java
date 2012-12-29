@@ -1,16 +1,17 @@
 package fr.free.naoj.lambdas.impl;
 
-import java.util.concurrent.Callable;
+import java.util.Arrays;
 
 import fr.free.naoj.lambdas.RepertoryFactory;
 
 public class RepertoryFactoryImpl implements RepertoryFactory {
 	
-	public void createAndInitARepertory() {
+	public Repertory createAndInitARepertory() {
 		System.out.println("Initializing a new repertory");
 		
-		RepertoryFactory lambdaAsAFactory = () -> { System.out.println("Calling method createAndInitARepertory() from lambda"); };
+		Repertory repertory = new Repertory();
+		repertory.getNames().addAll(Arrays.asList("Sophitia", "Nightmare", "Yoshimistu", "Ivy", "Xianghua", "Taki"));
 		
-		lambdaAsAFactory.createAndInitARepertory();
+		return repertory;
 	}
 }
