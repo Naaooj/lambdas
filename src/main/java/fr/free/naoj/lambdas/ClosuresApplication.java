@@ -1,8 +1,10 @@
 package fr.free.naoj.lambdas;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+import fr.free.naoj.lambdas.impl.Entry;
 import fr.free.naoj.lambdas.impl.Repertory;
 import fr.free.naoj.lambdas.impl.RepertoryFactoryImpl;
 
@@ -12,19 +14,25 @@ public class ClosuresApplication {
 		Repertory repertory = new RepertoryFactoryImpl().createAndInitARepertory();
 		
 		System.out.println("Names found in repertory : ");
-		for (String name : repertory) {
-			System.out.println(name);
-		}
+		displayEntries(repertory.getEntries());
 		
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("Which one do you want ?");
+		System.out.println("Which group do you want ?");
 		
-		String searchedName = scanner.next();
+		int searchedGroup = scanner.nextInt();
 		try {
-			searchedName = repertory.getEntryForName(searchedName);
-			System.out.println("Entry named [" + searchedName + "] has been selected");
+			List<Entry> searchedEntries = repertory.getEntriesForGroup(searchedGroup);
+			
+			System.out.println("Entries present in group [" + searchedGroup + "]");
+			displayEntries(searchedEntries);
 		} catch (NoSuchElementException e) {
 			System.out.println(e.getMessage());
+		}
+	}
+	
+	private static void displayEntries(List<Entry> entries) {
+		for (Entry entry : entries) {
+			System.out.println(entry);
 		}
 	}
 }
