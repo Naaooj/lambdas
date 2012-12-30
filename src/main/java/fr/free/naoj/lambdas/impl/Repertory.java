@@ -28,14 +28,9 @@ public class Repertory implements Iterable<Entry> {
 	}
 	
 	public List<Entry> getEntriesForGroup(final int groupId) {
-		List<Entry> entries = new ArrayList<>();
-		
-		for (Entry entry : getEntries()) {
-			if (entry.getGroupId() == groupId) {
-				entries.add(entry);
-			}
-		}
-		
-		return entries;
+		return getEntries()
+				.stream()
+				.filter(e -> e.getGroupId() == groupId)
+				.into(new ArrayList<Entry>());
 	}
 }
