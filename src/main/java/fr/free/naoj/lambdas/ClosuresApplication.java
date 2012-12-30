@@ -1,5 +1,6 @@
 package fr.free.naoj.lambdas;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -19,8 +20,9 @@ public class ClosuresApplication {
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Which group do you want ?");
 		
-		int searchedGroup = scanner.nextInt();
 		try {
+			int searchedGroup = scanner.nextInt();
+			
 			List<Entry> searchedEntries = repertory.getEntriesForGroup(searchedGroup);
 			
 			System.out.println("Entries present in group [" + searchedGroup + "]");
