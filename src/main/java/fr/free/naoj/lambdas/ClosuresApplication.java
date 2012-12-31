@@ -1,9 +1,9 @@
 package fr.free.naoj.lambdas;
 
-import java.util.InputMismatchException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 import fr.free.naoj.lambdas.impl.Entry;
 import fr.free.naoj.lambdas.impl.Repertory;
@@ -17,16 +17,21 @@ public class ClosuresApplication {
 		System.out.println("Names found in repertory : ");
 		displayEntries(repertory.getEntries());
 		
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("Which group do you want ?");
-		
-		try {
-			int searchedGroup = scanner.nextInt();
+		try {			
+			Collections.sort(repertory.getEntries(), new Comparator<Entry>() {
+				public int compare(Entry o1, Entry o2) {
+					int comparison = 0;
+					if (o1.getGroupId() > o2.getGroupId()) {
+						comparison = 1;
+					} else if (o1.getGroupId() < o2.getGroupId()) {
+						comparison = -1;
+					}
+					return comparison;
+				}
+			});
 			
-			List<Entry> searchedEntries = repertory.getEntriesForGroup(searchedGroup);
-			
-			System.out.println("Entries present in group [" + searchedGroup + "]");
-			displayEntries(searchedEntries);
+			System.out.println("Entries sorted by group");
+			displayEntries(repertory.getEntries());
 		} catch (NoSuchElementException e) {
 			System.out.println(e.getMessage());
 		}
