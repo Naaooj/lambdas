@@ -18,17 +18,7 @@ public class ClosuresApplication {
 		displayEntries(repertory.getEntries());
 		
 		try {			
-			Collections.sort(repertory.getEntries(), new Comparator<Entry>() {
-				public int compare(Entry o1, Entry o2) {
-					int comparison = 0;
-					if (o1.getGroupId() > o2.getGroupId()) {
-						comparison = 1;
-					} else if (o1.getGroupId() < o2.getGroupId()) {
-						comparison = -1;
-					}
-					return comparison;
-				}
-			});
+			Collections.sort(repertory.getEntries(), Entry::compareByGroupId);
 			
 			System.out.println("Entries sorted by group");
 			displayEntries(repertory.getEntries());

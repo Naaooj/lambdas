@@ -22,4 +22,16 @@ public class Entry {
 	public String toString() {
 		return groupId + ":" + name;
 	}
+	
+	public static int compareByGroupId(Entry firstEntry, Entry secondEntry) {
+		int comparison = 0;
+		
+		if (firstEntry.getGroupId() > secondEntry.getGroupId()) {
+			comparison = 1;
+		} else if (firstEntry.getGroupId() < secondEntry.getGroupId()) {
+			comparison = -1;
+		}
+		
+		return comparison;
+	}
 }
