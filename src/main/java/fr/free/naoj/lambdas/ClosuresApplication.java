@@ -1,7 +1,6 @@
 package fr.free.naoj.lambdas;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -18,7 +17,7 @@ public class ClosuresApplication {
 		displayEntries(repertory.getEntries());
 		
 		try {			
-			Collections.sort(repertory.getEntries(), Entry::compareByGroupId);
+			Collections.sort(repertory.getEntries(), Entry.comparing((Entry e) -> e.getGroupId()));
 			
 			System.out.println("Entries sorted by group");
 			displayEntries(repertory.getEntries());
