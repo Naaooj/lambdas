@@ -1,40 +1,34 @@
 package fr.free.naoj.lambdas;
 
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+import java.util.function.Function;
 
 import fr.free.naoj.lambdas.impl.Entry;
-import fr.free.naoj.lambdas.impl.Repertory;
-import fr.free.naoj.lambdas.impl.RepertoryFactoryImpl;
 
 public class ClosuresApplication {
 	
 	public static void main(String[] args) {
-		Repertory repertory = new RepertoryFactoryImpl().createAndInitARepertory();
+		Entry entry = new Entry(0, "Demo");
 		
-		System.out.println("Names found in repertory : ");
-		displayEntries(repertory.getEntries());
+		final ReferencedMethodCaller<Integer> getGroupIdMethod = entry::getGroupId;
+		final ReferencedMethodCaller<String> getNameMethod = entry::getName;
 		
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("Which group do you want ?");
-		
-		try {
-			int searchedGroup = scanner.nextInt();
-			
-			List<Entry> searchedEntries = repertory.getEntriesForGroup(searchedGroup);
-			
-			System.out.println("Entries present in group [" + searchedGroup + "]");
-			displayEntries(searchedEntries);
-		} catch (NoSuchElementException e) {
-			System.out.println(e.getMessage());
-		}
+		printOut(() -> "Playing with a functional interface");
+		printOut(() -> getGroupIdMethod.invoke() + ":" + getNameMethod.invoke());
 	}
 	
-	private static void displayEntries(List<Entry> entries) {
-		for (Entry entry : entries) {
-			System.out.println(entry);
-		}
+	public static void printOut(ReferencedMethodCaller<?> caller) {
+		System.out.println(caller.invoke());
+	}
+	
+	/**
+	 * Functional interface representing the invocation
+	 * of any method that has no argument
+	 * 
+	 * @author Naoj
+	 *
+	 * @param <T> the attented return type
+	 */
+	private interface ReferencedMethodCaller<T> {
+		T invoke();
 	}
 }
