@@ -8,6 +8,12 @@ import java.util.function.LongFunction;
 
 public class Entry {
 
+	public static final Mapper<Entry, Integer> GROUP_ID_MAPPER;
+	
+	static {
+		GROUP_ID_MAPPER = Entry::getGroupId;
+	}
+	
 	private int groupId;
 	private String name;
 	
