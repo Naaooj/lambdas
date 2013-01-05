@@ -1,14 +1,11 @@
 package fr.free.naoj.lambdas.impl;
 
 import java.util.Comparator;
-import java.util.function.DoubleFunction;
 import java.util.function.Function;
-import java.util.function.IntFunction;
-import java.util.function.LongFunction;
 
 public class Entry {
 
-	public static final Mapper<Entry, Integer> GROUP_ID_MAPPER;
+	public static final Function<Entry, Integer> GROUP_ID_MAPPER;
 	
 	static {
 		GROUP_ID_MAPPER = Entry::getGroupId;
@@ -47,7 +44,7 @@ public class Entry {
 		return comparison;
 	}
 	
-	public static <T, U extends Comparable<? super U>> Comparator<T> comparing(Mapper<T, U> mapper) {		
+	public static <T, U extends Comparable<? super U>> Comparator<T> comparing(Function<T, U> mapper) {		
 		// mapper is a lambda that takes an Entry as parameter (T)
 		// and which returns a certain property (U) of this parameter
 		
@@ -56,6 +53,6 @@ public class Entry {
 		// public interface Comparator<Entry>() {
 		// 		int compare(Entry x, Entry y);			
 		// }
-	    return (x, y) -> mapper.map(x).compareTo(mapper.map(y));
+	    return (x, y) -> mapper.apply(x).compareTo(mapper.apply(y));
 	}
 }
